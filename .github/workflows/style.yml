@@ -29,4 +29,4 @@ jobs:
           ${{ runner.os }}-cljstyle-
 
     - name: Run cljstyle check
-      run: clj -M:cljstyle check
+      run: clojure -M:cljstyle check
