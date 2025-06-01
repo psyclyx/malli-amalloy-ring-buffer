@@ -78,7 +78,9 @@ Note that `:capacity` cannot be combined with min/max bounds.
 ```clojure
 (m/validate [:amalloy/ring-buffer {:min-capacity 5} :int]
             (rb/ring-buffer 5)) ; => true
+```
 
+```clojure
 (m/validate [:amalloy/ring-buffer {:min-capacity 5} :int]
             (rb/ring-buffer 3)) ; => false
 ```
@@ -88,7 +90,9 @@ Note that `:capacity` cannot be combined with min/max bounds.
 ```clojure
 (m/validate [:amalloy/ring-buffer {:max-capacity 5} :int]
             (rb/ring-buffer 3)) ; => true
+```
 
+```clojure
 (m/validate [:amalloy/ring-buffer {:max-capacity 5} :int]
             (rb/ring-buffer 10)) ; => false
 ```
