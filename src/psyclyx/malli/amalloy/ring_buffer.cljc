@@ -14,24 +14,23 @@
          Integer))))
 
 
-#?(:clj
-   (defn ring-buffer?
-     [x]
-     (instance? RingBuffer x))
-
-   :cljs
-   (defn ring-buffer?
-     [x]
-     (instance? rb/RingBuffer x)))
+(defn ring-buffer?
+  "Check if `x` is a ring buffer."
+  [x]
+  (instance? #?(:clj RingBuffer
+                :cljs rb/RingBuffer)
+             x))
 
 
 (defn -capacity
+  "Capacity of `rb`, a ring buffer."
   [rb]
   (count (.-buf rb)))
 
 
 (defn -validate-capacity
-  [rb {:keys [capacity min-capacity max-capacity]}]
+  "Validate `rb`'s capacity against `:amalloy/ring-buffer` schema properties"
+  [rb {:keys [capacity min-capacity max-capacity] :as _properties}]
   (cond
     capacity
     (= capacity (-capacity rb))
@@ -47,14 +46,22 @@
 
 
 (defn -assert-capacity-properties
+  "Throw an exception if `:amalloy/ring-buffer` schema properties
+  include both exact and range capacity contraints."
+  ;; AFAICT, -property-schema is supposed to return a :map schema at
+  ;; the top-level, which I don't think can encode this constraint.
+  ;; Also, -collection-schema doesn't accept a property schema anyways,
+  ;; so we would need to write an entire IntoSchema implementation.
   [{:keys [capacity max-capacity min-capacity] :as properties}]
   (when (and capacity (or max-capacity min-capacity))
+    ;; This happens at schema `:compile`-time, so I think we should
+    ;; just throw an ex-info instead of m/-fail? Probably fine?
     (throw (ex-info "Cannot specify :capacity and :min-capacity/:max-capacity"
-                    {:schema :ring-buffer
+                    {:schema :amalloy/ring-buffer
                      :properties properties}))))
 
 
-(defn -capacity-error-fragment-en
+(defn- -capacity-error-fragment-en
   [{:keys [capacity min-capacity max-capacity]}]
   (cond
     capacity
@@ -70,7 +77,7 @@
     (str "capacity <= " max-capacity)))
 
 
-(defn -error-message-en
+(defn- -error-message-en
   [{:keys [schema value]} _options]
   (let [properties (m/properties schema)
         capacity-fragment (-capacity-error-fragment-en properties)]
@@ -88,6 +95,8 @@
 
 
 (defn -validator
+  "Construct a validation predicate for a `:amalloy/ring-buffer`
+  schema properties map."
   [properties]
   (fn valid?
     [?rb]
@@ -101,28 +110,37 @@
     {:compile
      (fn [{:keys [capacity] :as properties} _children _options]
        (-assert-capacity-properties properties)
-       {:type :ring-buffer
+       {:type :amalloy/ring-buffer
         :type-properties {:error/fn {:en -error-message-en}}
         :pred (-validator properties)
         :empty (some-> capacity rb/ring-buffer)})}))
 
 
-(defn -sequential->rb-fn
-  [{:keys [overflow schema]}]
-  (let [properties (m/properties schema)]
-    (fn [xs]
-      (if-not (sequential? xs)
-        xs
-        (let [capacity (or (:capacity properties) (count xs))
-              rb (rb/ring-buffer capacity)
-              [first-xs overflow-xs] (split-at capacity xs)]
-          (cond
-            ;; may have inferred capacity by counting xs
-            (not (-validate-capacity rb properties)) xs
-            (not (seq overflow-xs)) (into rb first-xs)
-            ;; only consume `xs` once
-            overflow (into rb (concat first-xs overflow-xs))
-            :else xs))))))
+(defn -pick-capacity
+  [{:keys [capacity max-capacity min-capacity]} xs]
+  (or capacity
+      (cond-> (count xs)
+        max-capacity (min max-capacity)
+        min-capacity (max min-capacity))))
+
+
+(defn -sequential->ring-buffer-fn
+  "Construct a function that decodes sequentials to ring buffers.
+
+  Options:
+    - `:overflow` - decode sequences larger than capacity instead
+                    of no-oping "
+  [properties {:keys [overflow]}]
+  (fn [xs]
+    (if-not (sequential? xs)
+      xs
+      (let [capacity (-pick-capacity properties xs)
+            rb (rb/ring-buffer capacity)
+            will-overflow? (seq (drop capacity xs))]
+        (cond
+          (not (-validate-capacity rb properties)) xs
+          (or overflow (not will-overflow?)) (into rb xs)
+          :else xs)))))
 
 
 (defn ring-buffer-transformer
@@ -130,15 +148,15 @@
   ([{:keys [decode-overflow]}]
    (mt/transformer
      {:decoders
-      {:ring-buffer
+      {:amalloy/ring-buffer
        {:compile (fn [schema _options]
-                   (-sequential->rb-fn {:overflow decode-overflow
-                                        :schema schema}))}}
+                   (-sequential->ring-buffer-fn (m/properties schema)
+                                                {:overflow decode-overflow}))}}
       :encoders
-      {:ring-buffer #(some-> % vec)}})))
+      {:amalloy/ring-buffer #(some-> % vec)}})))
 
 
-(defmethod mg/-schema-generator :ring-buffer [schema options]
+(defmethod mg/-schema-generator :amalloy/ring-buffer [schema options]
   (let [[child-schema] (m/-children schema)
         properties (m/properties schema)
         child-gen (mg/generator child-schema options)
@@ -158,4 +176,4 @@
 
 
 (def registry
-  {:ring-buffer -ring-buffer-into-schema})
+  {:amalloy/ring-buffer -ring-buffer-into-schema})
