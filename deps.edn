@@ -33,6 +33,12 @@
    {lambdaisland/kaocha {:mvn/version "1.91.1392"}
     com.lambdaisland/kaocha-cljs {:mvn/version "1.5.154"}}}
 
+  :build
+  {:ns-default build
+   :deps
+   {io.github.clojure/tools.build {:git/tag "v0.10.9" :git/sha "e405aac"}
+    slipset/deps-deploy {:mvn/version "0.2.2"}}}
+
   :outdated
   {:main-opts ["-m" "antq.core"]
    :deps

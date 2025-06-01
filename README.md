@@ -5,14 +5,14 @@ A [metosin/malli](https://github.com/metosin/malli) schema implementation for [c
 
 ## Project status
 
-*Alpha*
+**Alpha**
 
 There is decent test coverage, but this hasn't yet been tested in
 production. Use at your own risk. Issues and PRs are welcome!
 
 ## Installation
 
-*Latest version* - `0.0.1`
+**Latest version**: `0.0.1`
 
 This library is currently not hosted on clojars, and must be required as a git dep in `deps.edn`:
 
@@ -311,6 +311,42 @@ clj -M:libs:test --focus :clj
 clj -M:libs:test --focus :cljs
 ```
 
+### Builds
+
+#### Clean
+
+```clojure
+clj -T:build clean
+```
+
+#### Jar
+
+```clojure
+clj -T:build jar
+```
+
+#### Install
+
+Requires a previously-built jar.
+
+```clojure
+clj -T:build install
+```
+
+#### CI (clean, test, build jar)
+
+```clojure
+clj -T:build ci
+```
+
+#### Deploy to Clojars
+
+`CLOJARS_USERNAME` and `CLOJARS_TOKEN` must be set.
+
+```clojure
+clj -T:build ci && clj clj -T:build deploy
+```
+
 ### Miscellaneous tools
 
 #### Antq (identify outdated dependencies)
@@ -336,6 +372,14 @@ clj -M:cljstyle fix
 ## Contributing
 
 Issues and pull requests welcome!
+
+### Release checklist
+
+- [ ] Squash merge in to main (if needed)
+- [ ] Deploy to Clojars
+- [ ] Cut a new tag at commit used to deploy
+- [ ] Update changelog
+- [ ] Update version/tag/sha in readme
 
 ## Copyright
 
