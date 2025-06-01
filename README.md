@@ -323,3 +323,9 @@ clj -M:cljstyle fix
 ## Contributing
 
 Issues and pull requests welcome!
+
+## Copyright
+
+Copyright (c) 2025 Alice Burns
+
+Released under the MIT license.
