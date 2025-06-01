@@ -123,9 +123,9 @@
 
   (testing "Decode with overflow handling"
     (let [schema [:amalloy/ring-buffer {:capacity 3} :int]
-          transformer (malli.rb/ring-buffer-transformer {:decode-overflow true})]
+          transformer (malli.rb/ring-buffer-transformer {:overflow true})]
       ;; Overflow wraps around
-      (is (= (into (rb/ring-buffer 3) [1 2 3 4 5])
+      (is (= (into (rb/ring-buffer 3) [3 4 5])
              (m/decode schema [1 2 3 4 5] transformer)))))
 
   (testing "Encode to vector"

@@ -128,8 +128,7 @@
   "Construct a function that decodes sequentials to ring buffers.
 
   Options:
-    - `:overflow` - decode sequences larger than capacity instead
-                    of no-oping "
+    - `:overflow` - decode sequences larger than capacity instead of passing through"
   [properties {:keys [overflow]}]
   (fn [xs]
     (if-not (sequential? xs)
@@ -144,16 +143,20 @@
 
 
 (defn ring-buffer-transformer
+  "Transforms between ring buffers and sequentials.
+
+  Optionally accepts `opts`:
+    - `:overflow` - decode sequences larger than capacity instead of passing through"
   ([] (ring-buffer-transformer {}))
-  ([{:keys [decode-overflow]}]
+  ([opts]
    (mt/transformer
-     {:decoders
+     {:name :ring-buffer
+      :decoders
       {:amalloy/ring-buffer
        {:compile (fn [schema _options]
-                   (-sequential->ring-buffer-fn (m/properties schema)
-                                                {:overflow decode-overflow}))}}
+                   {:leave (-sequential->ring-buffer-fn (m/properties schema) opts)})}}
       :encoders
-      {:amalloy/ring-buffer #(some-> % vec)}})))
+      {:amalloy/ring-buffer {:enter #(some-> % vec)}}})))
 
 
 (defmethod mg/-schema-generator :amalloy/ring-buffer [schema options]
