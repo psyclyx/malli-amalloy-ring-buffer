@@ -3,7 +3,16 @@
 
 A [metosin/malli](https://github.com/metosin/malli) schema implementation for [clj-commons/ring-buffer](https://github.com/clj-commons/ring-buffer), providing validation, generation, and transformation capabilities for ring buffers in Clojure and ClojureScript.
 
+## Project status
+
+*Alpha*
+
+There is decent test coverage, but this hasn't yet been tested in
+production. Use at your own risk. Issues and PRs are welcome!
+
 ## Installation
+
+*Latest version* - `0.0.1`
 
 This library is currently not hosted on clojars, and must be required as a git dep in `deps.edn`:
 
