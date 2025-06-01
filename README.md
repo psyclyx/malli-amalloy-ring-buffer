@@ -3,7 +3,6 @@
 
 A [metosin/malli](https://github.com/metosin/malli) schema implementation for [clj-commons/ring-buffer](https://github.com/clj-commons/ring-buffer), providing validation, generation, and transformation capabilities for ring buffers in Clojure and ClojureScript.
 
-Ring buffers are fixed-size, circular data structures that automatically discard old elements when new ones are added beyond capacity - useful for sliding windows, recent event tracking, and bounded queues.
 ## Installation
 
 This library is currently not hosted on clojars, and must be required as a git dep in `deps.edn`:
