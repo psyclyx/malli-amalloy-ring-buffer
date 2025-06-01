@@ -9,7 +9,8 @@ This library is currently not hosted on clojars, and must be required as a git d
 
 ```clojure
 psyclyx/malli-amalloy-ring-buffer {:git/url "https://github.com/psyclyx/malli-amalloy-ring-buffer"
-                                   :git/sha "..."}
+                                   :git/tag "0.0.1"
+                                   :git/sha "10b290287d8f"}
 ```
 
 Note: This library doesn't declare `metosin/malli` or `clj-commons/ring-buffer` as dependencies, but does require namespaces from both.
