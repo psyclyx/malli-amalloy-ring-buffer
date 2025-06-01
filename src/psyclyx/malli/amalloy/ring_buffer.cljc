@@ -150,8 +150,7 @@
   ([] (ring-buffer-transformer {}))
   ([opts]
    (mt/transformer
-     {:name :ring-buffer
-      :decoders
+     {:decoders
       {:amalloy/ring-buffer
        {:compile (fn [schema _options]
                    {:leave (-sequential->ring-buffer-fn (m/properties schema) opts)})}}
