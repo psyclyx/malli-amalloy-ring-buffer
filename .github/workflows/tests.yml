@@ -45,4 +45,4 @@ jobs:
           ${{ runner.os }}-${{ matrix.platform }}-
 
     - name: Run tests
-      run: clojure -M:test --focus :${{ matrix.platform }}
+      run: clojure -M:libs:test --focus :${{ matrix.platform }}
