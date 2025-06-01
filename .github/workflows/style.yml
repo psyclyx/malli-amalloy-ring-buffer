@@ -1,0 +1,32 @@
+name: Code Style Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  cljstyle:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Clojure tools
+      uses: DeLaGuardo/setup-clojure@13.2
+      with:
+        cli: latest
+
+    - name: Cache Clojure dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.m2/repository
+          ~/.gitlibs
+        key: ${{ runner.os }}-cljstyle-${{ hashFiles('**/deps.edn') }}
+        restore-keys: |
+          ${{ runner.os }}-cljstyle-
+
+    - name: Run cljstyle check
+      run: clj -M:cljstyle check
