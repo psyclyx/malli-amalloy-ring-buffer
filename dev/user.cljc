@@ -17,7 +17,7 @@
 
 ;; Basic validation
 
-(def schema [:ring-buffer :int])
+(def schema [:amalloy/ring-buffer :int])
 
 (m/validate schema (rb/ring-buffer 3)) ; true
 
@@ -27,13 +27,13 @@
 
 ;; Capacity constraints
 
-(def capacity-schema [:ring-buffer {:capacity 5} :string])
+(def capacity-schema [:amalloy/ring-buffer {:capacity 5} :string])
 
 (m/validate capacity-schema (into (rb/ring-buffer 5) ["a" "b"])) ; true
 
 (m/validate capacity-schema (into (rb/ring-buffer 10) ["a" "b"])) ; false
 
-(def range-schema [:ring-buffer {:min-capacity 3 :max-capacity 10} :keyword])
+(def range-schema [:amalloy/ring-buffer {:min-capacity 3 :max-capacity 10} :keyword])
 
 (m/validate range-schema (into (rb/ring-buffer 5) [:a :b :c])) ; true
 
@@ -43,7 +43,7 @@
 
 (mg/generate schema)
 
-(mg/generate [:ring-buffer {:capacity 3 :gen/min 2 :gen/max 3} :string])
+(mg/generate [:amalloy/ring-buffer {:capacity 3 :gen/min 2 :gen/max 3} :string])
 
 
 ;; Transformation
@@ -56,14 +56,14 @@
 (-> (m/explain schema [1 2 3]) (me/humanize)) ; ["should be a ring buffer"]
 
 
-(-> (m/explain [:ring-buffer :int] (into (rb/ring-buffer 3) ["a" "b"]))
+(-> (m/explain [:amalloy/ring-buffer :int] (into (rb/ring-buffer 3) ["a" "b"]))
     (me/humanize)) ; ["should be an integer" "should be an integer"]
 
 
 ;; Complex schemas
 
 (def user-buffer
-  [:ring-buffer {:capacity 16}
+  [:amalloy/ring-buffer {:capacity 16}
    [:map
     [:id :uuid]
     [:name :string]
