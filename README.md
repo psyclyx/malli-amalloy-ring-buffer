@@ -30,14 +30,6 @@ xyz.psyclyx/malli-amalloy-ring-buffer {:mvn/version "0.1.29"}
 [xyz.psyclyx/malli-amalloy-ring-buffer "0.1.29"]
 ```
 
-### Git tag
-
-```clojure
-xyz.psyclyx/malli-amalloy-ring-buffer {:git/url "https://github.com/psyclyx/malli-amalloy-ring-buffer"
-                                       :git/tag "v0.1.29"
-                                       :git/sha "94717732454a"}
-```
-
 ## Usage
 
 Snippets in this section assume the following requires:

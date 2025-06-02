@@ -9,6 +9,12 @@ Some fixes to cljdoc generation.
 - Raised `metosin/malli` and `clj-commons/ring-buffer` deps to root.
   - Should ensure that cljdoc sees them. (unconfirmed)
 
+### Removed
+
+- Removed explicit git tag instructions
+  - Prevents SHA from being at least commit out of date.
+  - Tag is still listed in installation instructions.
+
 ## 0.1.29 (tag v0.1.29) - 2025-06-01
 
 ### Added
