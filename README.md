@@ -1,7 +1,7 @@
 # malli-amalloy-ring-buffer
-![Tests](https://github.com/psyclyx/malli-amalloy-ring-buffer/workflows/Tests/badge.svg)
-[![Clojars Project](https://img.shields.io/clojars/v/xyz.psyclyx/malli-amalloy-ring-buffer.svg)](https://clojars.org/xyz.psyclyx/malli-amalloy-ring-buffer)
-[![cljdoc badge](https://cljdoc.org/badge/xyz.psyclyx/malli-amalloy-ring-buffer)](https://cljdoc.org/d/xyz.psyclyx/malli-amalloy-ring-buffer)
+![Tests](https://github.com/psyclyx/malli-amalloy-ring-buffer/workflows/Tests/badge.svg?cache-control=no-cache)
+[![Clojars Project](https://img.shields.io/clojars/v/xyz.psyclyx/malli-amalloy-ring-buffer.svg?cache-control=no-cache)](https://clojars.org/xyz.psyclyx/malli-amalloy-ring-buffer)
+[![cljdoc badge](https://cljdoc.org/badge/xyz.psyclyx/malli-amalloy-ring-buffer?cache-control=no-cache)](https://cljdoc.org/d/xyz.psyclyx/malli-amalloy-ring-buffer)
 
 A [metosin/malli](https://github.com/metosin/malli) schema implementation for [clj-commons/ring-buffer](https://github.com/clj-commons/ring-buffer), providing validation, generation, and transformation capabilities for ring buffers in Clojure and ClojureScript.
 
@@ -389,6 +389,6 @@ Issues and pull requests welcome!
 
 ## Copyright
 
-Copyright (c) 2025 Alice Burns
+Copyright (c) 2025 psyclyx
 
 Released under the MIT license.

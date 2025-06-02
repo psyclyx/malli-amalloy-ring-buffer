@@ -77,7 +77,7 @@
      [:url "https://mit-license.org"]]]
    [:developers
     [:developer
-     [:name "Alice Burns"]]]
+     [:name "psyclyx"]]]
    [:scm
     [:url "https://github.com/psyclyx/malli-amalloy-ring-buffer"]
     [:connection "scm:git:https://github.com/psyclyx/malli-amalloy-ring-buffer.git"]
