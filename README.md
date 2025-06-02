@@ -14,20 +14,20 @@ production. Use at your own risk. Issues and PRs are welcome!
 
 ## Installation
 
-**Latest version**: `0.1.29` (tag `v0.1.29`)
+**Latest version**: `0.1.36` (tag `v0.1.36`)
 
 ### Clojars
 
 #### deps.edn
 
 ```clojure
-xyz.psyclyx/malli-amalloy-ring-buffer {:mvn/version "0.1.29"}
+xyz.psyclyx/malli-amalloy-ring-buffer {:mvn/version "0.1.36"}
 ```
 
 #### Leiningen/Boot
 
 ```clojure
-[xyz.psyclyx/malli-amalloy-ring-buffer "0.1.29"]
+[xyz.psyclyx/malli-amalloy-ring-buffer "0.1.36"]
 ```
 
 ## Usage
