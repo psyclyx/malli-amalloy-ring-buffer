@@ -1,5 +1,21 @@
 # Changelog
 
-## 0.0.1 - 2025-06-01
+## 0.1.29 (tag v0.1.29) - 2025-06-01
+
+### Added
+
+- Build tooling
+  - `build.clj`, accessible via `:build` alias
+    - Standard build tasks
+  - Clojars deployment
+    - xyz.psyclyx/malli-amalloy-ring-buffer
+
+
+### Changed
+
+- Git tag naming convention
+  - Git tags are now prefixed with `v` to better follow convention
+
+## 0.0.1 (tag 0.0.1) - 2025-06-01
 
 _First release._

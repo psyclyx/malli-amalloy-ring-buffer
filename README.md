@@ -12,17 +12,31 @@ production. Use at your own risk. Issues and PRs are welcome!
 
 ## Installation
 
-**Latest version**: `0.0.1`
+**Latest version**: `0.1.29` (tag `v0.1.29`)
 
-This library is currently not hosted on clojars, and must be required as a git dep in `deps.edn`:
+Note: This library doesn't declare `metosin/malli` or `clj-commons/ring-buffer` as dependencies, but does require namespaces from both. Ensure they are on your classpath.
+
+### Clojars
+
+#### deps.edn
 
 ```clojure
-psyclyx/malli-amalloy-ring-buffer {:git/url "https://github.com/psyclyx/malli-amalloy-ring-buffer"
-                                   :git/tag "0.0.1"
-                                   :git/sha "10b290287d8f"}
+xyz.psyclyx/malli-amalloy-ring-buffer {:mvn/version "0.1.29"}
 ```
 
-Note: This library doesn't declare `metosin/malli` or `clj-commons/ring-buffer` as dependencies, but does require namespaces from both.
+#### Leiningen/Boot
+
+```clojure
+[xyz.psyclyx/malli-amalloy-ring-buffer "0.1.29"]
+```
+
+### Git tag
+
+```clojure
+xyz.psyclyx/malli-amalloy-ring-buffer {:git/url "https://github.com/psyclyx/malli-amalloy-ring-buffer"
+                                       :git/tag "v0.1.29"
+                                       :git/sha "94717732454a"}
+```
 
 ## Usage
 
