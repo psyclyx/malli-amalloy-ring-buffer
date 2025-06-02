@@ -1,5 +1,7 @@
 # malli-amalloy-ring-buffer
 ![Tests](https://github.com/psyclyx/malli-amalloy-ring-buffer/workflows/Tests/badge.svg)
+[![Clojars Project](https://img.shields.io/clojars/v/xyz.psyclyx/malli-amalloy-ring-buffer.svg)](https://clojars.org/xyz.psyclyx/malli-amalloy-ring-buffer)
+[![cljdoc badge](https://cljdoc.org/badge/metosin/malli)](https://cljdoc.org/d/metosin/malli)
 
 A [metosin/malli](https://github.com/metosin/malli) schema implementation for [clj-commons/ring-buffer](https://github.com/clj-commons/ring-buffer), providing validation, generation, and transformation capabilities for ring buffers in Clojure and ClojureScript.
 
