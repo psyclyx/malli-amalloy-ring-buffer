@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+Some fixes to cljdoc generation.
+
+### Changed
+
+- Raised `metosin/malli` and `clj-commons/ring-buffer` deps to root.
+  - Should ensure that cljdoc sees them. (unconfirmed)
+
 ## 0.1.29 (tag v0.1.29) - 2025-06-01
 
 ### Added

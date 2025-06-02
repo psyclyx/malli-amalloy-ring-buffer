@@ -16,8 +16,6 @@ production. Use at your own risk. Issues and PRs are welcome!
 
 **Latest version**: `0.1.29` (tag `v0.1.29`)
 
-Note: This library doesn't declare `metosin/malli` or `clj-commons/ring-buffer` as dependencies, but does require namespaces from both. Ensure they are on your classpath.
-
 ### Clojars
 
 #### deps.edn
